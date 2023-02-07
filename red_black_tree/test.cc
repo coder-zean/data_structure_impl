@@ -7,13 +7,12 @@ int main() {
         rb_tree.Insert(i);
     }
 
-    rb_tree.InOrder();
+    rb_tree.PrintTree();
     rb_tree.Delete(10);
-    rb_tree.InOrder();
+    rb_tree.PrintTree();
     rb_tree.Delete(21);
-    rb_tree.InOrder();
-    rb_tree.Delete(3);
-    rb_tree.InOrder();
-    std::cout << rb_tree[2].key << std::endl;
+    rb_tree.PrintTree();
+    rb_tree.Delete(2);
+    rb_tree.PrintTree();
     return 0;
 }

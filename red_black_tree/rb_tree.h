@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <deque>
 
 enum Color { Black = 0, Red};
 
@@ -110,7 +111,29 @@ public:
     std::cout << std::endl;
   }
 
-  
+  void PrintTree() {
+    std::cout << "---- tree print begin ----" << std::endl;
+    if (root_node_ == nil_node_) {
+      std::cout << "tree is empty" << std::endl;
+      std::cout << "---- tree print end   ----" << std::endl;
+    }
+    std::deque<RBTreeNode<T>*> helper = {root_node_};
+    while (!helper.empty()) {
+      int size = helper.size();
+      for (int i = 0; i < size; i++) {
+        if (helper[0]->left != nil_node_) {
+          helper.push_back(helper[0]->left);
+        } 
+        if (helper[0]->right != nil_node_) {
+          helper.push_back(helper[0]->right);
+        }
+        std::cout << helper[0]->key << "-" << (helper[0]->color == Red ? "red" : "black") << "\t";
+        helper.pop_front();
+      }
+      std::cout << std::endl;
+    }
+    std::cout << "---- tree print end   ----" << std::endl;
+  }
   
 private:
   RBTreeNode<T>* nil_node_;
@@ -222,23 +245,23 @@ private:
       RBTreeNode<T>* parent = current->parent;
       RBTreeNode<T>* brother = (parent->left == current ? parent->right : parent->left);
       if (current == parent->left) {   // current在左子树
-        if (brother->color == Red) {
+        if (brother->color == Red) {   // case 1
           brother->color = Black;
           parent->color = Red;
           LeftRotate(parent);
           brother = parent->right;
         }
-        if (brother->left->color == Black && brother->right->color == Black) {
+        if (brother->left->color == Black && brother->right->color == Black) { // case 2
           brother->color = Red;
           current = parent;
           continue;
-        } else if (brother->right->color == Black) {
+        } else if (brother->right->color == Black) {  // case3
           brother->color = Red;
           brother->left->color = Black;
           RightRotate(brother);
           brother = parent->right;
         }  
-        brother->color = parent->color;
+        brother->color = parent->color;  // case4
         parent->color = Black;
         brother->right->color = Black;
         LeftRotate(parent);
