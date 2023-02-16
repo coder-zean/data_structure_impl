@@ -52,11 +52,11 @@ kmp算法关键在于不回溯i，每次失配只将j移动，而移动的位数
 
 当字符串匹配到下图位置时，发生失配：
 
-![img](../../asset/Pasted image 20230216105631.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216105631.png)
 
 因为ABCDAB的公共最大前后缀长度为2，所以将j回溯到2，此时表示模式p的前两位已经匹配，从第3位开始下一次匹配，而i并不用回溯：
 
-![img](../../asset/Pasted image 20230216105644.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216105644.png)
 
 把公共前后缀的最大长度保存到一个next数组中：
 
@@ -102,7 +102,7 @@ int KMP(string s, string p) {
 设此时j为6，有next[6] = 2，表示ABCDAB这一子串有AB这一长度为2的最大公共前后缀
 此时想求ABCDABC的最大公共前后缀，就得先看在结尾新加入的字符C是否和没加入前的最大公共前缀后一个位置的字符是否相同（即p[k] == p[j]），若相同，则最大公共前缀+1（即next[j+1] = k + 1）。
 
-![img](../../asset/Pasted image 20230216121310.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216121310.png)
 
 - 当p[k] != p[j]，则要继续递推检查p[next[k]]是否和p[j]相等，不断递归，直到找到匹配的，或者next[k]等于-1.
 
@@ -110,7 +110,7 @@ int KMP(string s, string p) {
 求j+1情况时，先检查p[j]是否等于p[k]，发现p[k] != p[j]，所以往更小范围缩。令k = next[k]，这里的依据是，当之前的最大前缀中已经和后缀不匹配了，所以找这个最大前缀中的最大前缀是否和后缀匹配。
 k = next[k] = 0，此时发现p[k] == p[j]，所以此时next[j+1] = next[k] + 1 = 1
 
-![img](../../asset/Pasted image 20230216122127.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216122127.png)
 
 
 ```c++
@@ -138,11 +138,11 @@ void GetNext(string p, vector<int>& next) {
 
 当匹配到i = 3，j = 3时，p[j] != s[i]，发生失配，则发生回溯，将j置为next[j] = 1。但是我们可以发现p[1]和p[3]是相等的，所以就是说，p[1]和s[3]再去比较，是必然失配的。所以我们要避免出现当p[j] == p[next[j]]时，往k回溯的现象，而是应当继续往回回溯，再次进行递归，令next[j] = next[k]
 
-![img](../../asset/Pasted image 20230216124407.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216124407.png)
 
 所以优化后next数组应该是这样：
 
-![img](../../asset/Pasted image 20230216125415.png)
+![img](https://github.com/coder-zean/data_structure_impl/blob/master/asset/Pasted%20image%2020230216125415.png)
 
 优化后求next数组代码：
 
