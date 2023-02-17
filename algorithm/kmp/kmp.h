@@ -31,18 +31,18 @@ private:
 	int k = -1;
 	int j = 0;
 	while (j < pLen - 1) {
-		//p[k]表示前缀，p[j]表示后缀
-		if (k == -1 || p[j] == p[k]) {
-			++k;
-			++j;
-			if (p[j] != p[k]) {
-			    next[j] = k;
-			} else {
-				next[j] = next[k];
-			}
+	  //p[k]表示前缀，p[j]表示后缀
+	  if (k == -1 || p[j] == p[k]) {
+	    ++k;
+	    ++j;
+	    if (p[j] != p[k]) {
+		  next[j] = k;
 		} else {
-			k = next[k];
+	      next[j] = next[k];
 		}
-	}
+	  } else {
+	    k = next[k];
+	  }
+    }
   }
 };

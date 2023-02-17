@@ -72,7 +72,7 @@ public:
       return;
     }
     std::cout << current->key << std::endl;
-    Remove(current);
+    DeleteHelper(current);
   }
 
   RBTreeNode<T>* Search(T key) {
@@ -159,7 +159,7 @@ private:
     return Minimum(node->left);
   }
 
-  void Remove(RBTreeNode<T>* remove_node) {
+  void DeleteHelper(RBTreeNode<T>* remove_node) {
     RBTreeNode<T>* replace = nil_node_;
     RBTreeNode<T>* now_remove = remove_node;  // 真正执行删除的节点位置
     Color now_remove_color = now_remove->color;
