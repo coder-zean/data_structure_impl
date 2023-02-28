@@ -20,9 +20,6 @@ struct BTreeNode {
     parent = nullptr;
     childs = new BTreeNode<T, M>*[M + 1];  // 最后一个位置只用于分裂时用
   }
-  // BTreeNode(uint32_t num, T keys[M], BTreeNode<T, M>* p, BTreeNode<T, M>*
-  // childs[M + 1]) : key_num(num), keys(keys), parent(p), childs(childs) {
-  // }
 };
 
 // 性质：
@@ -70,7 +67,6 @@ public:
         insert_place->keys[i + 1] = insert_place->keys[i];
       } else {
         insert_place->keys[i + 1] = key;
-        // cout << insert_place->keys[i + 1] << endl;
         break;
       }
       if (i == 0) {

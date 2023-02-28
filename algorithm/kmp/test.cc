@@ -5,8 +5,8 @@
 using namespace std;
 
 int main() {
-    string s = "abacababc";
-    string p = "abab";
+    string s = "mississippi";
+    string p = "issip";
     cout << KmpUtil::DoKmp(s, p) << endl;  // expect: 4
     return 0;
 }
