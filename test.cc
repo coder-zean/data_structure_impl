@@ -2,37 +2,16 @@
 
 using namespace std;
 
-class Test1{
+class Test {
 public:
-  void abdfe() {
-    cout << "ab" << endl;
-  }
-};
-
-class Test2 {
-public:
-  int abc;
-};
-
-class Test : public Test1 {
-
-  void t() {
-
-  }
-
-  static void ab() {
-
-  }
-
-  void abc() {
-
-  }
-private:
-  // int a = 100;
+  Test() {}
+  int a = 0;
+  int b = 100;
 };
 
 int main() {
-  Test a;
-  cout << sizeof(a) << endl;
+  Test t;
+  Test* tt = &t;
+  delete tt;
   return 0;
 }
